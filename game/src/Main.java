@@ -16,7 +16,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        Stage stage1= login.stage();
+        Stage stage1=new login().stage();
         stage1.show();
         ;
     }

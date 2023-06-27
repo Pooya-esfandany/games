@@ -10,4 +10,5 @@ public class Player {
     int totalMatch;
     int level;
     int capacity;
+    int currentMoney;
 }
