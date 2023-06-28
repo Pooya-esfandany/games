@@ -6,7 +6,6 @@ import javafx.scene.image.ImageView;
 public class Storage extends Build{
     String url=baseUrl+"Storage\\";
     int maxCapacity;
-
     int currentMoney;
     ImageView empty;
     ImageView notALot;
@@ -31,5 +30,10 @@ public class Storage extends Build{
         if(3*maxCapacity/4>currentMoney)
             return half;
         return Full;
+    }
+
+    @Override
+    public int ID() {
+        return 3;
     }
 }

@@ -21,4 +21,9 @@ public class Camp extends Build{
         capacity=level+5;
     }
     }
+
+    @Override
+    public int ID() {
+        return 2;
+    }
 }

@@ -4,6 +4,7 @@ package Data.build;
 import javafx.scene.image.ImageView;
 
 public abstract class Build {
+    public abstract int ID();
     int hp;
     int level;
     final  public  String baseUrl="file:C:\\Users\\USER\\Desktop\\God\\games\\game\\Data\\tower\\";

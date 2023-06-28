@@ -11,4 +11,41 @@ public class Player {
     int level;
     int capacity;
     int currentMoney;
+    int mapID;
+    public Map map;
+    private Player(String name,String password)
+    {
+            map=new Map();
+            Maps.maps.add(map);
+            this.mapID=map.mapID;
+            this.name=name;
+            this.password=password;
+    }
+    public Player(String name,String password,int currentMoney,int level,int totalMatch,int win,int mapID)
+    {
+        this.name=name;
+        this.password=password;
+        this.currentMoney=currentMoney;
+        this.mapID=mapID;
+        this.level=level;
+        this.totalMatch=totalMatch;
+        this.mapID=mapID;
+    }
+    public static  boolean addPlayer(String name,String password)
+    {
+        boolean isValid=true;
+        for(int i=0;i<players.size();i++)
+        {
+            if(players.get(i).name.equals(name))
+            {
+                isValid=false;
+            }
+        }
+        if(isValid=true)
+        {
+            Player player=new Player(name, password);
+            players.add(player);
+        }
+        return isValid;
+    }
 }
