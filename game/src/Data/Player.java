@@ -1,5 +1,8 @@
 package Data;
 
+import Data.map.MapData;
+import Data.map.Maps;
+
 import java.util.ArrayList;
 
 public class Player {
@@ -11,13 +14,13 @@ public class Player {
     int level;
     int capacity;
     int currentMoney;
-    int mapID;
-    public Map map;
+    public int mapID;
+    public MapData mapData;
     private Player(String name,String password)
     {
-            map=new Map();
-            Maps.maps.add(map);
-            this.mapID=map.mapID;
+            mapData =new MapData();
+            Maps.mapData.add(mapData);
+            this.mapID= mapData.mapID;
             this.name=name;
             this.password=password;
     }
@@ -47,5 +50,17 @@ public class Player {
             players.add(player);
         }
         return isValid;
+    }
+    public static Player get(String name,String password)
+    {
+        for(int i=0;i<players.size();i++)
+        {
+            if(players.get(i).name.equals(name))
+            {
+                if(players.get(i).password.equals(password))
+                    return players.get(i);
+            }
+        }
+        return null;
     }
 }

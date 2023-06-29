@@ -1,36 +1,21 @@
 package view;
 
-import Data.Player;
-import Data.build.Defence;
-import Data.unit.Unit;
-import javafx.animation.TranslateTransition;
-import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.media.AudioClip;
-import javafx.scene.media.AudioTrack;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import sun.audio.AudioPlayer;
 
-import java.io.FileInputStream;
-import java.util.TimerTask;
-
-public class login {
+public class Sign_in {
     public static Stage stage()
     {
         Stage stage=new Stage();
         TextField F_name=new TextField("enter your name");
         TextField F_password=new TextField("enter your password");
-        ImageView newAccount=new ImageView("file:C:\\Users\\USER\\Desktop\\God\\games\\game\\Data\\page\\dont have.png");
+        ImageView haveAccount=new ImageView("file:C:\\Users\\USER\\Desktop\\God\\games\\game\\Data\\page\\have.png");
         ImageView exit=new ImageView("file:C:\\Users\\USER\\Desktop\\God\\games\\game\\Data\\button\\exit.png");
         ImageView confirm=new ImageView("file:C:\\Users\\USER\\Desktop\\God\\games\\game\\Data\\button\\confirm.png");
         confirm.setLayoutY(380);
@@ -39,14 +24,14 @@ public class login {
         F_name.setAlignment(Pos.CENTER);
 
         F_password.setAlignment(Pos.CENTER);
-        VBox vBox=new VBox(F_name,F_password,newAccount);
+        VBox vBox=new VBox(F_name,F_password,haveAccount);
         vBox.setLayoutX(25);
         vBox.setLayoutY(218);
         F_name.setScaleY(1.5);
         vBox.setSpacing(50);
         F_password.setScaleY(1.5);
         Image backgroundimg=new Image("file:C:\\Users\\USER\\Desktop\\God\\games\\game\\Data\\page\\base.png");
-        BackgroundImage backgroundImage=new BackgroundImage(backgroundimg,BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER,BackgroundSize.DEFAULT);
+        BackgroundImage backgroundImage=new BackgroundImage(backgroundimg, BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,BackgroundSize.DEFAULT);
         pane.setBackground(new Background(backgroundImage));
         pane.getChildren().addAll(exit,vBox,confirm);
         exit.setX(580);
@@ -55,23 +40,8 @@ public class login {
             AudioClip media=new AudioClip("file:C:/Users/USER/Desktop/God/games/game/Data/button/click.mp3");
             media.play(20);
         });
-        newAccount.setOnMouseClicked(event -> {
-            stage.setScene(Sign_in.stage().getScene());
-        });
-        confirm.setOnMouseClicked(event -> {
-            AudioClip media=new AudioClip("file:C:/Users/USER/Desktop/God/games/game/Data/button/click.mp3");
-            media.play(20);
-            String name=F_name.getCharacters().toString();
-            String password=F_password.getCharacters().toString();
-            Player player=Player.get(name,password);
-            if (player==null)
-            {
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("name not found");
-                alert.setHeaderText("please enter correct name or password");
-                alert.showAndWait();
-
-            }
+        haveAccount.setOnMouseClicked(event -> {
+            stage.setScene(login.stage().getScene());
         });
         Scene scene=new Scene(pane,643,471);
         stage.setScene(scene);
@@ -79,4 +49,3 @@ public class login {
         return stage;
     }
 }
-

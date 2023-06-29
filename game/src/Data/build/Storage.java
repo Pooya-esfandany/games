@@ -3,7 +3,7 @@ package Data.build;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class Storage extends Build{
+public class Storage extends Build  {
     String url=baseUrl+"Storage\\";
     int maxCapacity;
     int currentMoney;
@@ -12,8 +12,8 @@ public class Storage extends Build{
     ImageView half;
     ImageView Full;
 
-    Storage(int x,int y,int hp, String tower,int capacity,int c) {
-        super(x,y,hp, tower);
+    Storage(int hp, String tower,int capacity) {
+        super(hp, tower);
         this.maxCapacity=capacity;
         empty=new ImageView(url+"1.png");
         notALot=new ImageView(url+"2.png");
@@ -35,5 +35,20 @@ public class Storage extends Build{
     @Override
     public int ID() {
         return 3;
+    }
+
+    @Override
+    public void upgrade() {
+        this.maxCapacity+=2000;
+        hp+=100;
+    }
+
+    @Override
+    public boolean haveUpgrade() {
+        if(level<10)
+        {
+            return true;
+        }
+        return false;
     }
 }

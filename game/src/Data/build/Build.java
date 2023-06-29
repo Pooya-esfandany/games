@@ -5,16 +5,16 @@ import javafx.scene.image.ImageView;
 
 public abstract class Build {
     public abstract int ID();
+    public abstract void upgrade();
+    public abstract boolean haveUpgrade();
     int hp;
-    int level;
+    public int level;
     final  public  String baseUrl="file:C:\\Users\\USER\\Desktop\\God\\games\\game\\Data\\tower\\";
     Tower tower;
     public ImageView defaultPhoto;
-    Build(int x,int y,int hp,String tower)
+    Build(int hp,String tower)
     {
-        this.X=x;
-        this.Y=y;
-        level=0;
+        level=1;
         this.hp=hp;
         this.tower=Tower.valueOf(tower);
     }

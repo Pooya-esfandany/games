@@ -3,8 +3,7 @@ package Data.build;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class Defence extends Build{
-
+public class Defence extends Build implements Cloneable {
 int attackSpeed;
 String baseLocation;
  ImageView defaultMode;
@@ -16,11 +15,12 @@ int Damage;
 int range;
 
 int maxLevel=10;
+int id;
 
-    public Defence(int x, int y, String location, int hp, String tower, int damage, int attackSpeed, int range) {
-        super(x,y,hp, tower);
+    public Defence(String location, int hp, String tower, int damage, int attackSpeed, int range,int id) {
+        super(hp, tower);
         this.baseLocation=super.baseUrl+"Defence\\"+location+"\\";
-
+        this.id=id;
         this.defaultPhoto=new ImageView(new Image(baseLocation+"default.png"));
         this.attackSpeed=attackSpeed;
         this.Damage=damage;
@@ -53,13 +53,13 @@ int maxLevel=10;
     }
     public void upgrade() {
     if (haveUpgrade()) {
-        Damage = Damage + 10;
+        Damage = Damage +100;
         level++;
         hp = hp + 100;
         this.attackSpeed = attackSpeed - 20;
     }
 }
-boolean haveUpgrade()
+public boolean haveUpgrade()
 {
     if(maxLevel==level)
         return false;
@@ -68,6 +68,6 @@ boolean haveUpgrade()
 
     @Override
     public int ID() {
-        return 1;
+        return id;
     }
 }

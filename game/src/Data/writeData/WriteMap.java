@@ -1,11 +1,8 @@
 package Data.writeData;
 
-import Data.Map;
-import Data.Maps;
+import Data.map.Maps;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 public class WriteMap extends Thread{
@@ -15,9 +12,9 @@ public class WriteMap extends Thread{
         try {
             FileOutputStream fileOutputStream=new FileOutputStream("maps.txt");
             ObjectOutputStream objectOutputStream=new ObjectOutputStream(fileOutputStream);
-            for(int i=0;i<Maps.maps.size();i++)
+            for(int i = 0; i<Maps.mapData.size(); i++)
             {
-                objectOutputStream.writeObject(Maps.maps.get(i));
+                objectOutputStream.writeObject(Maps.mapData.get(i));
             }
         } catch (Exception e) {
             e.printStackTrace();

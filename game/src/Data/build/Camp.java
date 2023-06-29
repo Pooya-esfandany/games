@@ -3,10 +3,10 @@ package Data.build;
 public class Camp extends Build{
     int capacity=5;
     int maxLevel=10;
-    public Camp(int x, int y, String tower, int hp) {
-        super(x, y, hp, tower);
+    public Camp(String tower, int hp) {
+        super(hp, tower);
     }
-    boolean haveUpgrade()
+    public boolean haveUpgrade()
     {
         if(level<maxLevel)
         {
@@ -14,7 +14,7 @@ public class Camp extends Build{
         }
         return false;
     }
-    void upgrade()
+    public void upgrade()
     {
         if(haveUpgrade())
         {level++;

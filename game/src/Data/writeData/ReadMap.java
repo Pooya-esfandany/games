@@ -1,7 +1,7 @@
 package Data.writeData;
 
-import Data.Map;
-import Data.Maps;
+import Data.map.MapData;
+import Data.map.Maps;
 
 import java.io.*;
 
@@ -15,8 +15,8 @@ public class ReadMap extends Thread{
             while(1==1)
             {
                 try {
-                    Map map = (Map) objectInputStream.readObject();
-                    Maps.maps.add(map);
+                    MapData mapData = (MapData) objectInputStream.readObject();
+                    Maps.mapData.add(mapData);
                 }
                 catch (Exception e)
                 {
