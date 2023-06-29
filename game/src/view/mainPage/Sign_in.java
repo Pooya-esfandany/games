@@ -1,5 +1,6 @@
-package view;
+package view.mainPage;
 
+import Data.Player;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
@@ -8,6 +9,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
+import view.mainPage.login;
+import view.mapView.MainPage;
 
 public class Sign_in {
     public static Stage stage()
@@ -22,7 +25,6 @@ public class Sign_in {
         confirm.setLayoutX(360);
         Pane pane=new Pane();
         F_name.setAlignment(Pos.CENTER);
-
         F_password.setAlignment(Pos.CENTER);
         VBox vBox=new VBox(F_name,F_password,haveAccount);
         vBox.setLayoutX(25);
@@ -41,7 +43,15 @@ public class Sign_in {
             media.play(20);
         });
         haveAccount.setOnMouseClicked(event -> {
-            stage.setScene(login.stage().getScene());
+            stage.close();
+            login.stage().show();
+        });
+        confirm.setOnMouseClicked(event -> {
+            if(!Player.addPlayer(F_name.getCharacters().toString(),F_password.getCharacters().toString()));
+            {
+                Player account=Player.get(F_name.getCharacters().toString(),F_password.getCharacters().toString());
+                MainPage.stage(account).show();
+            }
         });
         Scene scene=new Scene(pane,643,471);
         stage.setScene(scene);

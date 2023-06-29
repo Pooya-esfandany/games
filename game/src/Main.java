@@ -1,11 +1,12 @@
 
-import Data.build.Build;
+import Data.Player;
+import Data.map.MapData;
 import Data.writeData.ReadMap;
 import Data.writeData.ReadPlayers;
-import Data.writeData.WriteMap;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import view.login;
+import view.mainPage.login;
+
 
 
 public class Main extends Application {
@@ -19,6 +20,10 @@ public class Main extends Application {
         ReadPlayers writingAllPlayer=new ReadPlayers();
         writingAllPlayer.start();
         writingAllPlayer.join();
+        for(int i=0;i<Player.players.size();i++)
+        {
+            MapData.added();
+        }
         Stage stage1=new login().stage();
         stage1.show();
         ;

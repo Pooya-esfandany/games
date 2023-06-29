@@ -13,11 +13,16 @@ public class Base  extends Build{
 
     @Override
     public void upgrade() {
-        hp+=500;
+        level++;
+        if (haveUpgrade()) {
+            hp += 500;
+        }
     }
 
     @Override
     public boolean haveUpgrade() {
+        if(level<10)
+            return true;
         return false;
     }
 

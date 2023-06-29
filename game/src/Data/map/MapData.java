@@ -1,9 +1,6 @@
 package Data.map;
 
-import Data.build.Base;
-import Data.build.Build;
-import Data.build.Camp;
-import Data.build.Defence;
+import Data.build.*;
 
 import java.io.Serializable;
 
@@ -17,17 +14,22 @@ public class MapData implements Serializable {
                 this.safeZone[i][j] = -1;
             }
         }
-        Add(new Base(1000, "Base"));
-        Add(new Camp( "Camp", 200));
-        Add(new Defence("cannon", 400, "Defence", 400, 2000, 100,1));
+        Base base=new Base(1000,"Base");
+        Add(8,7,base);
+        Defence cannon=new Defence("cannon",500,"Defence",100,500,150,1);
+        Add(8,8,cannon);
+        Storage storage=new Storage(300,"Storage",1000);
+        Add(7,7,storage);
+        Camp camp=new Camp("Camp",200);
+        Add(7,8,camp);
         this.mapID=total;
         total++;
     }
     public int mapID;
-    int[][] safeZone=new int[15][15];
-    public boolean Add(Build build) {
-        if (safeZone[build.X][build.Y] == 0) {
-            safeZone[build.X][build.Y] = build.ID()*10+ build.level-1;
+    public int[][] safeZone=new int[15][15];
+    public boolean Add(int x,int y,Build build) {
+        if (safeZone[x][y] == -1) {
+            safeZone[x][y] = build.ID()*10+ build.level-1;
             return true;
         }
         return false;

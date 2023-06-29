@@ -53,10 +53,9 @@ int id;
     }
     public void upgrade() {
     if (haveUpgrade()) {
-        Damage = Damage +100;
+        Damage = Damage +50;
         level++;
         hp = hp + 100;
-        this.attackSpeed = attackSpeed - 20;
     }
 }
 public boolean haveUpgrade()

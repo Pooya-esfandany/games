@@ -1,28 +1,15 @@
-package view;
+package view.mainPage;
 
 import Data.Player;
-import Data.build.Defence;
-import Data.unit.Unit;
-import javafx.animation.TranslateTransition;
-import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.media.AudioClip;
-import javafx.scene.media.AudioTrack;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import sun.audio.AudioPlayer;
-
-import java.io.FileInputStream;
-import java.util.TimerTask;
 
 public class login {
     public static Stage stage()
@@ -56,7 +43,8 @@ public class login {
             media.play(20);
         });
         newAccount.setOnMouseClicked(event -> {
-            stage.setScene(Sign_in.stage().getScene());
+            stage.close();
+            Sign_in.stage().show();
         });
         confirm.setOnMouseClicked(event -> {
             AudioClip media=new AudioClip("file:C:/Users/USER/Desktop/God/games/game/Data/button/click.mp3");

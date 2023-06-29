@@ -2,25 +2,23 @@ package Data;
 
 import Data.map.MapData;
 import Data.map.Maps;
+import Data.writeData.WritePlayer;
 
 import java.util.ArrayList;
 
 public class Player {
     public static ArrayList<Player> players=new ArrayList<>();
-    String name;
-    String password;
-    int win;
-    int totalMatch;
-    int level;
+    public String name;
+    public String password;
+    public int win;
+    public int totalMatch;
+    public int level;
     int capacity;
-    int currentMoney;
+    public int currentMoney;
     public int mapID;
-    public MapData mapData;
+    public  MapData mapData;
     private Player(String name,String password)
     {
-            mapData =new MapData();
-            Maps.mapData.add(mapData);
-            this.mapID= mapData.mapID;
             this.name=name;
             this.password=password;
     }
@@ -48,7 +46,17 @@ public class Player {
         {
             Player player=new Player(name, password);
             players.add(player);
-        }
+            player.mapData =new MapData();
+            Maps.mapData.add(player.mapData);
+            player.mapID= player.mapData.mapID;
+            WritePlayer writePlayer=new WritePlayer(player);
+            writePlayer.start();
+            try{
+            writePlayer.join();
+        }catch (Exception e)
+            {
+                e.printStackTrace();
+            }}
         return isValid;
     }
     public static Player get(String name,String password)
