@@ -23,11 +23,15 @@ public class Main extends Application {
         writingAllPlayer.start();
         writingAllPlayer.join();
         for (int i = 0; i < Player.players.size(); i++) {
-
-            System.out.println(Player.players.get(i).name);
             MapData.added();
         }
-        Stage stage1=new login().stage();
+        System.out.println(Maps.mapData.size());
+        for(int i=0;i<Maps.mapData.size();i++)
+        {
+            System.out.println(Maps.mapData.get(i).mapID);
+        }
+
+         Stage stage1=new login().stage();
         stage1.show();
         ;
     }

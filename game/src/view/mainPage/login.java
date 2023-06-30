@@ -15,8 +15,6 @@ import view.mapView.MainPage;
 public class login {
     public static Stage stage()
     {
-        Player x=Player.get("pooya","p@ssword1");
-
         Stage stage=new Stage();
         TextField F_name=new TextField("enter your name");
         TextField F_password=new TextField("enter your password");

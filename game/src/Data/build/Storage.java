@@ -16,7 +16,7 @@ public class Storage extends Build  {
         super(hp, tower);
         this.maxCapacity=capacity;
         empty=new ImageView(url+"1.png");
-        System.out.println(url+"1.png");
+
         notALot=new ImageView(url+"2.png");
         half=new ImageView(url+"3.png");
         Full=new ImageView(url+"4.png");

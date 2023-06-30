@@ -1,26 +1,29 @@
 package Data.writeData;
 
+import Data.map.MapData;
 import Data.map.Maps;
 
+import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 
 public class WriteMap extends Thread{
-
     @Override
     public void run() {
         try {
-            FileOutputStream fileOutputStream=new FileOutputStream("maps.txt");
-            ObjectOutputStream objectOutputStream=new ObjectOutputStream(fileOutputStream);
-            for(int i = 0; i<Maps.mapData.size(); i++)
-            {
-                objectOutputStream.writeObject(Maps.mapData.get(i));
+            OutputStream fileOutputStream = new FileOutputStream("maps.txt");
+            BufferedOutputStream bufferedOutputStream=new BufferedOutputStream(fileOutputStream);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(new BufferedOutputStream(bufferedOutputStream));
+
+            for (MapData mapData : Maps.mapData) {
+                objectOutputStream.writeObject(mapData);
             }
-            fileOutputStream.close();
+            objectOutputStream.flush();
             objectOutputStream.close();
+            bufferedOutputStream.close();
+            fileOutputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-    }
-}
+    }}

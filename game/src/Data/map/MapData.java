@@ -7,8 +7,7 @@ import java.io.Serializable;
 public class MapData implements Serializable {
 
     private static int total=1;
-    public MapData(){
-
+     public MapData(){
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
                 this.safeZone[i][j] = -1;
@@ -27,11 +26,19 @@ public class MapData implements Serializable {
         this.mapID=total;
         total++;
     }
+
     public int mapID;
     public int[][] safeZone=new int[7][7];
     public boolean Add(int x,int y,Build build) {
         if (safeZone[x][y] == -1) {
             safeZone[x][y] = build.ID()*10+ build.level-1;
+            return true;
+        }
+        return false;
+    }
+    public boolean Add(int x,int y,int build) {
+        if (safeZone[x][y] == -1) {
+            safeZone[x][y] = build;
             return true;
         }
         return false;
