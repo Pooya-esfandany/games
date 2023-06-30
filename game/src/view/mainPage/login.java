@@ -10,10 +10,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
+import view.mapView.MainPage;
 
 public class login {
     public static Stage stage()
     {
+        Player x=Player.get("pooya","p@ssword1");
+
         Stage stage=new Stage();
         TextField F_name=new TextField("enter your name");
         TextField F_password=new TextField("enter your password");
@@ -52,13 +55,16 @@ public class login {
             String name=F_name.getCharacters().toString();
             String password=F_password.getCharacters().toString();
             Player player=Player.get(name,password);
-            if (player==null)
-            {
-                Alert alert=new Alert(Alert.AlertType.ERROR);
+            if (player==null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("name not found");
                 alert.setHeaderText("please enter correct name or password");
                 alert.showAndWait();
-
+            }
+            else
+            {
+                MainPage.stage(player).show();
+                stage.close();
             }
         });
         Scene scene=new Scene(pane,643,471);

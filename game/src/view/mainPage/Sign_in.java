@@ -51,6 +51,7 @@ public class Sign_in {
             {
                 Player account=Player.get(F_name.getCharacters().toString(),F_password.getCharacters().toString());
                 MainPage.stage(account).show();
+                stage.close();
             }
         });
         Scene scene=new Scene(pane,643,471);

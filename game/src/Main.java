@@ -1,6 +1,7 @@
 
 import Data.Player;
 import Data.map.MapData;
+import Data.map.Maps;
 import Data.writeData.ReadMap;
 import Data.writeData.ReadPlayers;
 import javafx.application.Application;
@@ -14,14 +15,16 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        ReadMap readMap=new ReadMap();
-        readMap.run();
+        ReadMap readMap = new ReadMap();
+        readMap.start();
         readMap.join();
-        ReadPlayers writingAllPlayer=new ReadPlayers();
+
+        ReadPlayers writingAllPlayer = new ReadPlayers();
         writingAllPlayer.start();
         writingAllPlayer.join();
-        for(int i=0;i<Player.players.size();i++)
-        {
+        for (int i = 0; i < Player.players.size(); i++) {
+
+            System.out.println(Player.players.get(i).name);
             MapData.added();
         }
         Stage stage1=new login().stage();

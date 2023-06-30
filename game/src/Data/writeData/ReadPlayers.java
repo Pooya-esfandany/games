@@ -31,6 +31,7 @@ public class ReadPlayers extends  Thread{
                     player.mapData = Maps.Find(mapId);
                     Player.players.add(player);
                 }
+                connection.close();
             }
             catch (Exception e)
             {

@@ -16,6 +16,8 @@ public class WriteMap extends Thread{
             {
                 objectOutputStream.writeObject(Maps.mapData.get(i));
             }
+            fileOutputStream.close();
+            objectOutputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

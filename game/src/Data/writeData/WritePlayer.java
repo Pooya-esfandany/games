@@ -26,7 +26,6 @@ public class WritePlayer extends Thread {
         String add =String.format("INSERT INTO player (name,Password,win,Battle,money,MapID,level) VALUES ('%s','%s',%d,%d,%d,%d,%d)",player.name,
                 player.password,win,battle,money,mapId,level);
 
-
         connection.prepareStatement(add).execute();
         connection.close();
     }catch (Exception e)

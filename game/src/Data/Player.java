@@ -47,6 +47,7 @@ public class Player {
             Player player=new Player(name, password);
             players.add(player);
             player.mapData =new MapData();
+            player.currentMoney=10000;
             Maps.mapData.add(player.mapData);
             player.mapID= player.mapData.mapID;
             WritePlayer writePlayer=new WritePlayer(player);
