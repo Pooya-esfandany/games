@@ -17,29 +17,5 @@ public class Maps implements Serializable {
         }
         return null;
     }
-    public static void debug()
-    {
-        ArrayList<MapData> debug=new ArrayList<>();
-        for(int i=mapData.size()-1;i>0;i--)
-        {
-            boolean value;
-            value=true;
-            for(int j=0;j<debug.size();j++)
-            {
-                if(debug.get(j).mapID==mapData.get(i).mapID)
-                {
-                    value=false;
-                }
-            }
-            if(value)
-            {
-                debug.add(mapData.get(i));
-            }
-        }
-        mapData=new ArrayList<>();
-        for(int i=0;i<debug.size();i++)
-        {
-            mapData.add(debug.get(i));
-        }
-    }
+
 }

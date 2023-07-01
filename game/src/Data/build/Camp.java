@@ -3,15 +3,15 @@ package Data.build;
 import javafx.scene.image.ImageView;
 
 public class Camp extends Build{
-    int capacity=5;
-    int maxLevel=10;
+    public int capacity=5;
+
     public Camp(String tower, int hp) {
         super(hp, tower);
         this.defaultPhoto=new ImageView("file:C:\\Users\\USER\\Desktop\\God\\games\\game\\Data\\tower\\camp\\camp.png");
     }
     public boolean haveUpgrade()
     {
-        if(level<maxLevel)
+        if(level<10)
         {
             return true;
         }
@@ -21,7 +21,8 @@ public class Camp extends Build{
     {
         if(haveUpgrade())
         {level++;
-        capacity=level+5;
+        capacity=level+1;
+        cost+=cost+1000;
     }
     }
 

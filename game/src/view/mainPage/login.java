@@ -1,6 +1,7 @@
 package view.mainPage;
 
 import Data.Player;
+import Data.unit.Unit;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -65,6 +66,7 @@ public class login {
                 stage.close();
             }
         });
+
         Scene scene=new Scene(pane,643,471);
         stage.setScene(scene);
         stage.setResizable(false);

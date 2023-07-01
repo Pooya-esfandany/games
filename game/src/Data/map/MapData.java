@@ -1,12 +1,30 @@
 package Data.map;
 
+import Data.AttackData.BuildLocation;
 import Data.build.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class MapData implements Serializable {
 
     private static int total=1;
+    public ArrayList<BuildLocation> getLocation()
+    {
+        ArrayList<BuildLocation> buildLocations =new ArrayList<>();
+        for(int i=0;i<7;i++)
+        {
+            for(int j=0;j<7;j++)
+            {
+                if(safeZone[i][j]!=-1)
+                {
+                    BuildLocation buildLocation =new BuildLocation(i,j,safeZone[i][j]);
+                    buildLocations.add(buildLocation);
+                }
+            }
+        }
+        return buildLocations;
+    }
      public MapData(){
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
@@ -36,6 +54,11 @@ public class MapData implements Serializable {
         }
         return false;
     }
+    public int get(int x,int y)
+    {
+        return safeZone[x][y];
+    }
+
     public boolean Add(int x,int y,int build) {
         if (safeZone[x][y] == -1) {
             safeZone[x][y] = build;

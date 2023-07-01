@@ -11,8 +11,8 @@ ImageView attack_L;
 ImageView attack_R;
 ImageView attack_U;
 ImageView attack_D;
-int Damage;
-int range;
+public int damage;
+public int range;
 
 int maxLevel=10;
 int id;
@@ -23,7 +23,7 @@ int id;
         this.id=id;
         this.defaultPhoto=new ImageView(new Image(baseLocation+"default.png"));
         this.attackSpeed=attackSpeed;
-        this.Damage=damage;
+        this.damage =damage;
         this.range=range;
         attack_L=new ImageView(baseLocation+"L.gif");
         attack_U=new ImageView(baseLocation+"U.gif");
@@ -53,7 +53,7 @@ int id;
     }
     public void upgrade() {
     if (haveUpgrade()) {
-        Damage = Damage +50;
+        damage = damage +50;
         level++;
         hp = hp + 100;
     }

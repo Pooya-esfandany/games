@@ -17,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import view.attack.Resource;
 
 import java.util.ArrayList;
 
@@ -31,6 +32,9 @@ public class MainPage {
         Image level=new Image("file:C:\\Users\\USER\\Desktop\\God\\games\\game\\Data\\map\\level.png");
         ImageView shop=new ImageView("file:C:\\Users\\USER\\Desktop\\God\\games\\game\\Data\\map\\shop.png");
         ImageView save=new ImageView("file:C:\\Users\\USER\\Desktop\\God\\games\\game\\Data\\map\\save.png");
+        ImageView attack=new ImageView("file:C:\\Users\\USER\\Desktop\\God\\games\\game\\Data\\map\\attack.png");
+        attack.setLayoutY(600);
+        attack.setLayoutX(0);
         save.setOnMouseClicked(event -> {
             WriteMap writeMap=new WriteMap();
             writeMap.start();
@@ -69,15 +73,35 @@ public class MainPage {
                 views.get(views.size()-1).setLayoutX(i*100);
             }
         }}
+        attack.setOnMouseClicked(event -> {
+            Resource.stage(player).show();
+            stage.close();
+            media.stop();
+        });
+
         pane.getChildren().addAll(views);
         pane.getChildren().add(stackPane);
         pane.getChildren().add(shop);
         pane.getChildren().add(save);
+        pane.getChildren().add(attack);
         Scene scene=new Scene(pane,700,700);
 
         stage.setScene(scene);
         stage.setResizable(false);
+        scene.setOnMouseClicked(event -> {
+            int clickedX= (int) event.getX();
+            int clickedY=(int)event.getY();
+            int x=(int)Math.floor(clickedX/100);
+            int y=(int)Math.floor(clickedY/100);
+            int id=(player.mapData.get(x,y));
+            if(id!=-1)
+            {
+                Upgrade.stage(player,x,y,id).show();
+                stage.close();
+            }
 
+
+        });
 
         ;
         return stage;

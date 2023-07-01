@@ -2,10 +2,7 @@ package Data.unit;
 
 import javafx.scene.image.ImageView;
 
-import java.util.ArrayList;
-
 public class Unit {
-    public static ArrayList<Unit> units=new ArrayList<>();
     private static String Url="file:C:\\Users\\USER\\Desktop\\God\\games\\game\\Data\\unit\\";
     private String baseUrl;
     public ImageView currentPose;
@@ -22,7 +19,7 @@ public class Unit {
         this.attackSpeed=attackSpeed;
         this.damage=damage;
         this.movementSpeed=movementSpeed;
-        this.Range=range;
+        this.range =range;
         baseUrl=Url+unit+"\\";
         L_walk=new ImageView(baseUrl+"Walk-L.gif");
         R_walk=new ImageView(baseUrl+"Walk-R.gif");
@@ -31,7 +28,7 @@ public class Unit {
         L_Attack =new ImageView(baseUrl+"Attack-L.gif");
         R_Attack=new ImageView(baseUrl+"Attack-R.gif");
     }
-    int Range;
+    public int range;
     int damage;
     int movementSpeed;
     int attackSpeed;

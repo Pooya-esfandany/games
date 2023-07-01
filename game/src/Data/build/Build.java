@@ -8,6 +8,7 @@ public abstract class Build {
     public abstract void upgrade();
     public abstract boolean haveUpgrade();
     int hp;
+    public int cost=2000;
     public int level;
     final  public  String baseUrl="file:C:\\Users\\USER\\Desktop\\God\\games\\game\\Data\\tower\\";
     Tower tower;

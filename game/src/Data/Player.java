@@ -22,6 +22,11 @@ public class Player {
             this.name=name;
             this.password=password;
     }
+    public static Player random()
+    {
+        int random=(int)(Math.random()*players.size());
+         return players.get(random);
+    }
     public Player(String name,String password,int currentMoney,int level,int totalMatch,int win,int mapID)
     {
         this.name=name;
