@@ -1,6 +1,7 @@
 package view.attack;
 
 import Data.AttackData.BuildLocation;
+import Data.AttackData.InHandUnit;
 import Data.Player;
 import Data.build.Camp;
 import Data.unit.Unit;
@@ -103,30 +104,15 @@ public class Resource {
             }
         });
         button.setOnMouseClicked(event -> {
-            ArrayList<Unit> units=new ArrayList<>();
-            for(int i=0;i<wizardNumber;i++)
-            {
-                units.add(Units.getByID(4));
-            }
-            for(int i=0;i<enhancerNumber;i++)
-            {
-                units.add(Units.getByID(2));
-            }
-            for(int i=0;i<knightNumber;i++)
-            {
-                units.add(Units.getByID(1));
-            }
-            for(int i=0;i<archerNumber;i++)
-            {
-                units.add(Units.getByID(3));
-            }
+            InHandUnit inHandUnit=new InHandUnit(wizardNumber,knightNumber,archerNumber,enhancerNumber);
             stage.close();
             Player random=Player.random();
-            Attack.stage(units,player,random).show();
+            Attack.stage(inHandUnit,player,random).show();
         });
         HBox Hbox=new HBox();
         Hbox.getChildren().addAll(archerPane,enhancerPane,knightPane,wizardPane);
         VBox vbox=new VBox();
+
         vbox.getChildren().addAll(Hbox,attack);
         Scene scene=new Scene(vbox);
         stage.setScene(scene);

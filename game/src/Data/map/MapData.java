@@ -77,6 +77,16 @@ public class MapData implements Serializable {
         }
         return null;
     }
+    public  boolean Safe(int x,int y)
+    {
+        int X=(int)Math.floor(x/100);
+        int Y=(int)(Math.floor(y/100));
+        if(safeZone[X][Y]==-1)
+        {
+            return true;
+        }
+        return false;
+    }
     public static void added()
     {
         total++;

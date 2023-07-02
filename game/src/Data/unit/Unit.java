@@ -1,5 +1,7 @@
 package Data.unit;
 
+import Data.AttackData.BuildLocation;
+import Data.AttackData.UnitLocation;
 import javafx.scene.image.ImageView;
 
 public class Unit {
@@ -22,31 +24,33 @@ public class Unit {
         this.range =range;
         baseUrl=Url+unit+"\\";
         L_walk=new ImageView(baseUrl+"Walk-L.gif");
+        currentPose=new ImageView(baseUrl+"Walk-L.gif");
         R_walk=new ImageView(baseUrl+"Walk-R.gif");
         Death=new ImageView(baseUrl+"Death.gif");
         Dead=new ImageView(baseUrl+"Dead.gif");
+        WalkingRight();
         L_Attack =new ImageView(baseUrl+"Attack-L.gif");
         R_Attack=new ImageView(baseUrl+"Attack-R.gif");
     }
     public int range;
-    int damage;
-    int movementSpeed;
-    int attackSpeed;
+    public int damage;
+    public int movementSpeed;
+    public int attackSpeed;
     public void WalkingLeft()
     {
-        currentPose=L_walk;
+        currentPose.setImage(L_walk.getImage());
     }
     public void WalkingRight()
     {
-        currentPose=R_walk;
+        currentPose.setImage(R_walk.getImage());
     }
     public void AttackLeft()
     {
-        currentPose=L_Attack;
+        currentPose.setImage(L_Attack.getImage());
     }
     public void AttackRight()
     {
-        currentPose=R_Attack;
+        currentPose.setImage(R_Attack.getImage());
     }
     public void Dead() {
         currentPose = Death;
@@ -59,5 +63,9 @@ public class Unit {
 
         }
     }
+    public void Attack(BuildLocation buildLocation)
+    {
+        buildLocation.build.hp=buildLocation.build.hp-damage;
 
+    }
 }

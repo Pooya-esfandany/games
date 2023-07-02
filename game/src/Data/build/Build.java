@@ -1,13 +1,14 @@
 package Data.build;
 
 
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public abstract class Build {
     public abstract int ID();
     public abstract void upgrade();
     public abstract boolean haveUpgrade();
-    int hp;
+    public int hp;
     public int cost=2000;
     public int level;
     final  public  String baseUrl="file:C:\\Users\\USER\\Desktop\\God\\games\\game\\Data\\tower\\";
@@ -21,4 +22,8 @@ public abstract class Build {
     }
     public int X;
     public int Y;
+    public void destroyed()
+    {
+        defaultPhoto.setImage(new Image("file:C:\\Users\\USER\\Desktop\\God\\games\\game\\Data\\tower\\boom.png"));
+    }
 }

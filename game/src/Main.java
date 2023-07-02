@@ -26,13 +26,6 @@ public class Main extends Application {
         for (int i = 0; i < Player.players.size(); i++) {
             MapData.added();
         }
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 7; j++) {
-                System.out.printf("%d  ", Player.players.get(0).mapData.safeZone[j][i]);
-            }
-            System.out.println(" ");
-        }
-
         Stage stage1 = new login().stage();
         stage1.show();
         ;

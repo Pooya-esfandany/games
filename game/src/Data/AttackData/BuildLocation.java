@@ -14,5 +14,13 @@ public class BuildLocation {
         this.x=x*100+50;
         this.y=y*100+50;
     }
+    public boolean destroyed()   {
+        if(build.hp<=0)
+        {
+            return true;
+        }
+        return false;
+
+    }
 
 }

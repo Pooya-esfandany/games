@@ -1,5 +1,6 @@
 package Gate;
 
+import Data.AttackData.BuildLocation;
 import Data.Player;
 import Data.errors.NotEnoughCash;
 
