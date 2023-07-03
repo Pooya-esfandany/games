@@ -32,7 +32,7 @@ public class Crusher extends Build implements Defence{
             if (haveUpgrade()) {
                 damage = damage +50;
                 level++;
-                hp = hp + 100;
+                hp = hp + 300;
             }
         }
         public boolean haveUpgrade()

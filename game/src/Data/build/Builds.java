@@ -16,7 +16,7 @@ public class Builds {
             case 3:
                 build = new Storage(350, "Storage", 10000);break;
             case 4:
-                build = new Crusher("crusher", 10000, "Defence", 10000, 5000, 100, 4);break;
+                build = new Crusher("crusher", 10000, "Defence", 5000, 5000, 100, 4);break;
         }
         for (int i = 0; i < level; i++) {
             build.upgrade();

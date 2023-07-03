@@ -52,7 +52,7 @@ public class Attack {
                     {
                         Attack.victory=true;
                     }
-                    
+
                     lose=false;
                     victory=false;
                     views=new ArrayList<>();

@@ -59,7 +59,6 @@ public class Unit {
     }
     public void Dead() {
         currentPose.setImage(Dead.getImage());
-
     }
 
 

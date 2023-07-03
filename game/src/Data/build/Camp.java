@@ -21,7 +21,7 @@ public class Camp extends Build{
     {
         if(haveUpgrade())
         {level++;
-        capacity=level+1;
+        capacity=5+level;
         cost+=cost+1000;
     }
     }
