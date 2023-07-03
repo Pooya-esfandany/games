@@ -1,50 +1,75 @@
 package Data.AttackData;
 
+import Data.build.Build;
+import Data.build.Cannon;
+import Data.build.Crusher;
 import Data.build.Defence;
 
 public class DefenceLocation {
-    int x;
-    Defence defence;
-    int y;
-    int range;
+    public int x;
+    boolean isDestroyed=false;
+    public boolean isBusy()
+    {
+        if(build instanceof  Cannon)
+        {
+            return ((Cannon)(build)).isBusy();
+        }
+        if(build instanceof Crusher)
+        {
+            return false;
+        }
+        return true;
+    }
+    public Build build;
+    public boolean InRange(UnitLocation unitLocation)
+    {
+        if(build instanceof Cannon)
+        {
+            return ((Cannon)(build)).InRange(unitLocation);
+        }
+        if(build instanceof Crusher)
+        {
+            return ((Crusher)(build)).InRange(unitLocation);
+        }
+        return false;
+    }
+    public void Attack(UnitLocation unitLocation)
+    {
+
+        if(build instanceof Cannon)
+        {
+             ((Cannon)(build)).Attack(unitLocation);
+
+        }
+        if(build instanceof Crusher)
+        {
+             ((Crusher)(build)).Attack(unitLocation);
+        }
+
+    }
+    public int speed;
+    public int y;
+    public int range;
     int damage;
-    DefenceLocation(int x,int y,BuildLocation buildLocation)
+    public DefenceLocation(BuildLocation buildLocation)
     {
-        this.x=x;
-        this.y=y;
-        this.range=((Defence)(buildLocation.build)).range;
-        this.defence =((Defence)(buildLocation.build));
-        this.damage=((Defence)(buildLocation.build)).damage;
-    }
-    public boolean inRange(UnitLocation unit)
-    {
-        int Y= y-unit.y;
-        int X= x- unit.x;
-        int distance=(int)(Math.sqrt((Math.pow(Y,2))+Math.pow(X,2)));
-        if(distance<range)
+        this.build=buildLocation.build;
+        if(buildLocation.build instanceof Cannon)
         {
-        if(Math.abs(Y)>Math.abs(X))
+            this.x=buildLocation.x;
+            this.y= buildLocation.y;
+            this.damage=((Cannon)(buildLocation.build)).damage;
+            this.range=((Cannon)(buildLocation.build)).range;
+            this.speed=((Cannon)(buildLocation.build)).attackSpeed;
+        }
+        if(buildLocation.build instanceof Crusher)
         {
-            if(Y<0)
-            {
-                defence.Down();
-            }
-            else
-            {
-                defence.Up();
-            }
+            this.x=buildLocation.x;
+            this.y= buildLocation.y;
+            this.damage=((Crusher)(buildLocation.build)).damage;
+            this.range=((Crusher)(buildLocation.build)).range;
+            this.speed=((Crusher)(buildLocation.build)).attackSpeed;
         }
-        else {
-            if(X>0)
-            {
-                defence.Left();
-            }
-            else
-                defence.Right();
-        }
-            return true;
-    }
-    return false;
     }
 
 }

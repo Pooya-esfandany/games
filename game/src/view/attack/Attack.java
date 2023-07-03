@@ -1,14 +1,11 @@
 package view.attack;
 
-import Data.AttackData.BuildLocation;
-import Data.AttackData.InHandUnit;
-import Data.AttackData.Move;
-import Data.AttackData.UnitLocation;
+import Data.AttackData.*;
 import Data.Player;
 import Data.build.Builds;
+import Data.build.Cannon;
+import Data.build.Defence;
 import Data.unit.Unit;
-import Data.unit.Units;
-import javafx.animation.TranslateTransition;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,9 +13,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Attack {
     public static int current = 1;
@@ -26,23 +24,60 @@ public class Attack {
     public static ArrayList<UnitLocation> unitLocations=new ArrayList<>();
     public static Player defender;
     public static ArrayList<ImageView> views = new ArrayList<>();
+    public static ArrayList<DefenceLocation> defenceLocation =new ArrayList<>();
 
     public static Stage stage(InHandUnit units, Player Attacker, Player Defender) {
+        ;
         defender=Defender;
         Stage stage = new Stage();
         Pane pane = new Pane();
+        Timer timer = new Timer();
+        defenceLocation =Defender.mapData.getDefenceLocation();
+        TimerTask task = new TimerTask() {
+            public void run() {
+                if(unitLocations.size()>0)
+                {
+                for(int i = 0; i< defenceLocation.size(); i++) {
+                    for (int j = 0; j < unitLocations.size(); j++)
+                    {
+                        if(!defenceLocation.get(i).isBusy()) {
+                            if (defenceLocation.get(i).InRange(unitLocations.get(j))) {
+                                DefenceThread defenceThread = new DefenceThread(defenceLocation.get(i), unitLocations.get(j));
+                                defenceThread.start();
+                                if(defenceLocation.get(i).build instanceof Cannon)
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+            }}
+        };
+        timer.schedule(task,0,1000);
         locations=Defender.mapData.getLocation();
         BackgroundImage backgroundImage = new BackgroundImage(new Image("file:C:\\Users\\USER\\Desktop\\God\\games\\game\\Data\\map\\ground.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         pane.setBackground(new Background(backgroundImage));
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 7; j++) {
-                if (Defender.mapData.safeZone[i][j] != -1) {
-                    views.add((Builds.getByID(Defender.mapData.safeZone[i][j]).defaultPhoto));
-                    views.get(views.size() - 1).setLayoutY(j * 100);
-                    views.get(views.size() - 1).setLayoutX(i * 100);
-                }
+
+        for(int i=0;i<locations.size();i++)
+        {
+            if(!(locations.get(i).build instanceof Defence)) {
+                ImageView view = locations.get(i).build.defaultPhoto;
+                view.setLayoutX(locations.get(i).x - 50);
+                view.setLayoutY(locations.get(i).y - 50);
+                views.add(view);
             }
         }
+        for(int i=0;i<defenceLocation.size();i++)
+        {
+                ImageView view = defenceLocation.get(i).build.defaultPhoto;
+                view.setLayoutX(defenceLocation.get(i).x - 50);
+                view.setLayoutY(defenceLocation.get(i).y - 50);
+                views.add(view);
+            }
+
         ImageView enhancer = new ImageView("file:C:\\Users\\USER\\Desktop\\God\\games\\game\\Data\\attack\\Es.jpg");
         ImageView wizard = new ImageView("file:C:\\Users\\USER\\Desktop\\God\\games\\game\\Data\\attack\\Ws.jpg");
         ImageView knight = new ImageView("file:C:\\Users\\USER\\Desktop\\God\\games\\game\\Data\\attack\\Ks.jpg");
@@ -106,18 +141,20 @@ public class Attack {
                     box.getChildren().remove(wizardPane);
                 }
                 unitLocations.add(unitLocation);
-
                 UnitThread thread=new UnitThread(locations,unitLocation);
                 thread.start();
             }
 
         });
-
         box.getChildren().addAll(archerPane, enhancerPane, knightPane, wizardPane);
         box.setLayoutY(600);
         Scene scene = new Scene(pane, 700, 700);
         stage.setScene(scene);
+        stage.setResizable(false);
         return stage;
+    }
+    public void refreshUnit(UnitLocation unitLocation)
+    {
     }
 
 

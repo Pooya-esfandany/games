@@ -17,17 +17,8 @@ public class UnitLocation {
         this.range=unit.range;
     }
 
-    public boolean inRange(BuildLocation buildLocation)
-    {
-        int Y= buildLocation.y-y;
-        int X= buildLocation.x-x;
-        int total=(int)Math.sqrt(Math.pow(X,2)+Math.pow(Y,2));
-        if(total<range)
-        {
-            return true;
-        }
-        return false;
-    }
+
+
     public BuildLocation closestBuild(ArrayList<BuildLocation> locations)
     {
         int minX;

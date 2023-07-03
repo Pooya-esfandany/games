@@ -5,6 +5,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public abstract class Build {
+    public long attackSpeed;
+
     public abstract int ID();
     public abstract void upgrade();
     public abstract boolean haveUpgrade();

@@ -8,7 +8,7 @@ public class Units {
                 unit = new Unit("Knight", 15000, 20, 400, 2500, 60);
                 break;
             case 2:
-                unit = new Unit("Enchantress", 5000, 50, 500, 2000, 80);
+                unit = new Unit("Enchantress", 50000, 500, 500, 2000, 80);
                 break;
             case 3:
                 unit = new Unit("Archer", 2000, 50, 1820, 4000, 150);

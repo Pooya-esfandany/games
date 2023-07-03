@@ -19,7 +19,8 @@ public class UnitThread extends Thread{
     public void run()
     {
         while(notFinished)
-        {            int distanceX=0;
+        {
+            int distanceX=0;
             int distanceY=0;
             boolean left;
 ;
@@ -27,6 +28,11 @@ public class UnitThread extends Thread{
             int speed=unitLocation.unit.movementSpeed;
 
             double time=Math.sqrt(distanceY*distanceY+distanceX*distanceX)/(speed);
+            if(unitLocation.unit.isDead())
+            {
+                unitLocation.unit.Dead();
+            }
+            else{
             if(closestBuild.x>unitLocation.x)
             {
                 unitLocation.unit.WalkingRight();
@@ -61,6 +67,9 @@ public class UnitThread extends Thread{
             int finalDistanceY = distanceY;
             int finalDistanceX = distanceX;
             translateTransition.setOnFinished(event -> {
+                if(!unitLocation.unit.isDead()){
+                unitLocation.y=unitLocation.y+ finalDistanceY;
+                unitLocation.x=unitLocation.x+ finalDistanceX;
                 if(left)
                 {
                     unitLocation.unit.AttackLeft();
@@ -74,9 +83,7 @@ public class UnitThread extends Thread{
                 Timer timer = new Timer();
                 TimerTask task = new TimerTask() {
                     public void run() {
-                        unitLocation.unit.Attack(closestBuild);
-                        System.out.println(closestBuild.build.hp);
-                        try {
+                        unitLocation.unit.Attack(closestBuild);try {
                             if(closestBuild.destroyed())
                             {
                                 Exception exception=new Exception();
@@ -86,24 +93,19 @@ public class UnitThread extends Thread{
                             closestBuild.build.destroyed();
                             buildLocations.remove(closestBuild);
                             timer.cancel();
-                            unitLocation.y=unitLocation.y+ finalDistanceY;
-                            
-                            unitLocation.x=unitLocation.x+ finalDistanceX;
                             UnitThread unitThread=new UnitThread(buildLocations,unitLocation);
                             unitThread.start();
                         }
                     }
                 };
                 timer.scheduleAtFixedRate(task, 0, unitLocation.unit.attackSpeed);
-            });
+            }});
             break;
         }
-    }
+    }}
     public UnitThread(ArrayList<BuildLocation> buildLocations,UnitLocation unitLocation)
     {
         this.unitLocation=unitLocation;
         this.buildLocations=buildLocations;
     }
-
-
 }

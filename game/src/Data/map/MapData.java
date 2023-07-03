@@ -1,6 +1,7 @@
 package Data.map;
 
 import Data.AttackData.BuildLocation;
+import Data.AttackData.DefenceLocation;
 import Data.build.*;
 
 import java.io.Serializable;
@@ -25,6 +26,23 @@ public class MapData implements Serializable {
         }
         return buildLocations;
     }
+    public ArrayList<DefenceLocation> getDefenceLocation()
+    {
+        ArrayList<BuildLocation>all=getLocation();
+        ArrayList<DefenceLocation>defencive=new ArrayList<>();
+        for(int i=0;i<all.size();i++)
+        {
+            if(all.get(i).build instanceof Cannon)
+            {
+                defencive.add(new DefenceLocation(all.get(i)));
+            }
+            if(all.get(i).build instanceof Crusher)
+            {
+                defencive.add(new DefenceLocation(all.get(i)));
+            }
+        }
+        return defencive;
+    }
      public MapData(){
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 7; j++) {
@@ -33,12 +51,12 @@ public class MapData implements Serializable {
         }
         Base base=new Base(1000,"Base");
         Add(3,3,base);
-        Defence cannon=new Defence("cannon",500,"Defence",100,500,150,1);
+        Cannon cannon=new Cannon("cannon",500,"Defence",100,500,150,1);
         Add(3,4,cannon);
         Storage storage=new Storage(300,"Storage",1000);
         Add(4,3,storage);
         Camp camp=new Camp("Camp",200);
-        Defence smasher=new Defence("crusher", 600, "Defence", 1000, 2000, 70, 4);
+        Cannon smasher=new Cannon("crusher", 600, "Defence", 1000, 2000, 70, 4);
         Add(3,2,camp);
         Add(2,3,smasher);
         this.mapID=total;

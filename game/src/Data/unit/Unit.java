@@ -1,7 +1,6 @@
 package Data.unit;
 
 import Data.AttackData.BuildLocation;
-import Data.AttackData.UnitLocation;
 import javafx.scene.image.ImageView;
 
 public class Unit {
@@ -14,10 +13,10 @@ public class Unit {
     ImageView L_walk;
     ImageView Death;
     ImageView Dead;
-    int Hp;
+    public int hp;
     public Unit(String unit,int hp,int damage,int attackSpeed,int movementSpeed,int range)
     {
-        Hp=hp;
+        this.hp =hp;
         this.attackSpeed=attackSpeed;
         this.damage=damage;
         this.movementSpeed=movementSpeed;
@@ -53,19 +52,20 @@ public class Unit {
         currentPose.setImage(R_Attack.getImage());
     }
     public void Dead() {
-        currentPose = Death;
-        try {
-            wait(2000);
-            currentPose=Dead;
-        }
-        catch (Exception e)
-        {
-
-        }
+        currentPose.setImage(Dead.getImage());
     }
     public void Attack(BuildLocation buildLocation)
     {
         buildLocation.build.hp=buildLocation.build.hp-damage;
+
+    }
+    public boolean isDead()
+    {
+        if(hp<=0)
+        {
+            return true;
+        }
+        return false;
 
     }
 }
