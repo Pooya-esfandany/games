@@ -28,8 +28,8 @@ public class UnitThread extends Thread{
             boolean left;
             if(buildLocations.size()==0)
             {
-                Attack.victory=true;
-                break;
+                if(Attack.victory=true)
+                    break;
             }
             BuildLocation closestBuild=unitLocation.closestBuild(buildLocations);
             int speed=unitLocation.unit.movementSpeed;
@@ -133,6 +133,7 @@ public class UnitThread extends Thread{
                 if(Attack.defenceLocation.get(i).y==y)
                 {
                     Attack.defenceLocation.get(i).build.destroyed();
+                    Attack.defenceLocation.get(i).build.hp=-10;
                     Attack.defenceLocation.remove(i);
                 }
             }

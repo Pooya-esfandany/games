@@ -32,6 +32,7 @@ public class Attack {
 
     public static Stage stage(InHandUnit units, Player Attacker, Player Defender) {
         ;
+        victory=false;
         locations=Defender.mapData.getLocation();
         defender=Defender;
         Stage stage = new Stage();
@@ -41,12 +42,20 @@ public class Attack {
         totalBuilds=locations.size();
         TimerTask task = new TimerTask() {
             public void run() {
-                if(unitLocations.size()+units.getTotal()==0)
+                if(unitLocations.size()==0&&units.finished())
                 {
                     lose=true;
                 }
                 if(victory||lose)
                 {
+                    if(locations.size()==0)
+                    {
+                        Attack.victory=true;
+                    }
+                    
+                    lose=false;
+                    victory=false;
+                    views=new ArrayList<>();
                     try {
                         timer.cancel();
                         CloseStage closeStage=new CloseStage(Attacker,stage);

@@ -22,6 +22,8 @@ public class DefenceThread extends Thread{
             }
             TimerTask task = new TimerTask() {
                 public void run() {
+                    if(defenceLocation.build.hp>0)
+                    {
                     defenceLocation.Attack(unitLocation);
                     if (unitLocation.unit.isDead()) {
                         unitLocation.unit.Dead();
@@ -31,7 +33,7 @@ public class DefenceThread extends Thread{
                             ((Cannon) (defenceLocation.build)).busy = false;
                         }
                     }
-                }
+                }}
             };
             timer.schedule(task, 0, defenceLocation.speed);
         }

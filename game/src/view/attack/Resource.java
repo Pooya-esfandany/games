@@ -33,6 +33,11 @@ public class Resource {
     }
     public static Stage stage(Player player)
     {
+        capacity=0;
+        archerNumber=0;
+        wizardNumber=0;
+        knightNumber=0;
+        enhancerNumber=0;
         ArrayList<BuildLocation> buildLocations =player.mapData.getLocation();
         for(int i = 0; i< buildLocations.size(); i++)
         {
@@ -104,10 +109,13 @@ public class Resource {
             }
         });
         button.setOnMouseClicked(event -> {
+
             InHandUnit inHandUnit=new InHandUnit(wizardNumber,knightNumber,archerNumber,enhancerNumber);
             stage.close();
             Player random=Player.random();
             Attack.stage(inHandUnit,player,random).show();
+            Attack.lose=false;
+            Attack.victory=false;
         });
         HBox Hbox=new HBox();
         Hbox.getChildren().addAll(archerPane,enhancerPane,knightPane,wizardPane);

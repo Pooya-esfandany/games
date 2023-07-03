@@ -31,13 +31,22 @@ public class InHandUnit {
     }
 
     public InHandUnit(int wizard, int knight, int archer, int enchantress) {
+        this.total=0;
         this.archer = archer;
         this.knight = knight;
         this.wizard = wizard;
         this.enchantress = enchantress;
         total = enchantress + wizard + knight + archer;
     }
-
+    public boolean finished()
+    {
+        int total=archer+wizard+enchantress+knight;
+        if(total==0)
+        {
+            return true;
+        }
+        return false;
+    }
     public Unit get(int id) {
         if (id == 1) {
             if (knight > 0) {
