@@ -7,7 +7,7 @@ import Data.build.Defence;
 
 public class DefenceLocation {
     public int x;
-    boolean isDestroyed=false;
+    public boolean isDestroyed=false;
     public boolean isBusy()
     {
         if(build instanceof  Cannon)

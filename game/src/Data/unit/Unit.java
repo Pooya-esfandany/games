@@ -1,7 +1,13 @@
 package Data.unit;
 
 import Data.AttackData.BuildLocation;
+import Data.build.Defence;
+import javafx.animation.Timeline;
 import javafx.scene.image.ImageView;
+import view.attack.UnitThread;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Unit {
     private static String Url="file:C:\\Users\\USER\\Desktop\\God\\games\\game\\Data\\unit\\";
@@ -53,7 +59,10 @@ public class Unit {
     }
     public void Dead() {
         currentPose.setImage(Dead.getImage());
+
     }
+
+
     public void Attack(BuildLocation buildLocation)
     {
         buildLocation.build.hp=buildLocation.build.hp-damage;

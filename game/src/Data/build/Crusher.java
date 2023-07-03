@@ -8,8 +8,6 @@ public class Crusher extends Build implements Defence{
 
         public int attackSpeed;
         String baseLocation;
-        ImageView defaultMode;
-        ImageView Attacking;
         public int damage;
         public int range;
 
@@ -21,18 +19,15 @@ public class Crusher extends Build implements Defence{
             this.baseLocation=super.baseUrl+"Defence\\"+location+"\\";
             this.id=id;
             this.defaultPhoto=new ImageView(new Image(baseLocation+"default.png"));
+            this.defaultImage=new ImageView(new Image(baseLocation+"default.png"));
+            this.AttackImage=new ImageView(new Image(baseLocation+"attack.png"));
             this.attackSpeed=attackSpeed;
             this.damage =damage;
             this.range=range;
 
         }
-        public void Default()
-        {
-            super.defaultPhoto.setImage(defaultMode.getImage());
-        }
-        public void Attack() {
-            super.defaultPhoto.setImage(Attacking.getImage());
-        }
+        ImageView defaultImage;
+        ImageView AttackImage;
         public void upgrade() {
             if (haveUpgrade()) {
                 damage = damage +50;
@@ -64,10 +59,20 @@ public class Crusher extends Build implements Defence{
 
             if(this.Y+range>unit.y&&this.Y-range<=unit.y)
             {
+                AttackMode();
                 return true;
             }
         }
+        DefaultMode();
         return false;
+    }
+    private void AttackMode()
+    {
+        defaultPhoto.setImage(AttackImage.getImage());
+    }
+    private void DefaultMode()
+    {
+        defaultPhoto.setImage(defaultImage.getImage());
     }
 
     @Override

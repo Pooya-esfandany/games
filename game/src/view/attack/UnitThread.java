@@ -1,7 +1,10 @@
 package view.attack;
 
 import Data.AttackData.BuildLocation;
+import Data.AttackData.DefenceLocation;
 import Data.AttackData.UnitLocation;
+import Data.build.Cannon;
+import Data.build.Defence;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
@@ -18,12 +21,16 @@ public class UnitThread extends Thread{
     @Override
     public void run()
     {
-        while(notFinished)
+        while(!unitLocation.unit.isDead())
         {
             int distanceX=0;
             int distanceY=0;
             boolean left;
-;
+            if(buildLocations.size()==0)
+            {
+                Attack.victory=true;
+                break;
+            }
             BuildLocation closestBuild=unitLocation.closestBuild(buildLocations);
             int speed=unitLocation.unit.movementSpeed;
 
@@ -83,6 +90,10 @@ public class UnitThread extends Thread{
                 Timer timer = new Timer();
                 TimerTask task = new TimerTask() {
                     public void run() {
+                        if(unitLocation.unit.isDead())
+                        {
+                            timer.cancel();
+                        }
                         unitLocation.unit.Attack(closestBuild);try {
                             if(closestBuild.destroyed())
                             {
@@ -91,6 +102,10 @@ public class UnitThread extends Thread{
                             }
                         } catch (Exception e) {
                             closestBuild.build.destroyed();
+                            if(closestBuild.build instanceof Defence)
+                            {
+                                Destroy(closestBuild.x,closestBuild.y);
+                            }
                             buildLocations.remove(closestBuild);
                             timer.cancel();
                             UnitThread unitThread=new UnitThread(buildLocations,unitLocation);
@@ -102,10 +117,25 @@ public class UnitThread extends Thread{
             }});
             break;
         }
-    }}
+    }
+    }
     public UnitThread(ArrayList<BuildLocation> buildLocations,UnitLocation unitLocation)
     {
         this.unitLocation=unitLocation;
         this.buildLocations=buildLocations;
+    }
+    public static void Destroy(int x,int y)
+    {
+        for(int i=0;i<Attack.defenceLocation.size();i++)
+        {
+            if(Attack.defenceLocation.get(i).x==x)
+            {
+                if(Attack.defenceLocation.get(i).y==y)
+                {
+                    Attack.defenceLocation.get(i).build.destroyed();
+                    Attack.defenceLocation.remove(i);
+                }
+            }
+        }
     }
 }

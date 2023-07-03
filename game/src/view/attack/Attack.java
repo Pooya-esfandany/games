@@ -6,6 +6,7 @@ import Data.build.Builds;
 import Data.build.Cannon;
 import Data.build.Defence;
 import Data.unit.Unit;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -23,20 +24,49 @@ public class Attack {
     public static ArrayList<BuildLocation> locations=new ArrayList<>();
     public static ArrayList<UnitLocation> unitLocations=new ArrayList<>();
     public static Player defender;
+    public static boolean victory;
+    public static boolean lose;
+    public static int totalBuilds;
     public static ArrayList<ImageView> views = new ArrayList<>();
     public static ArrayList<DefenceLocation> defenceLocation =new ArrayList<>();
 
     public static Stage stage(InHandUnit units, Player Attacker, Player Defender) {
         ;
+        locations=Defender.mapData.getLocation();
         defender=Defender;
         Stage stage = new Stage();
         Pane pane = new Pane();
         Timer timer = new Timer();
         defenceLocation =Defender.mapData.getDefenceLocation();
+        totalBuilds=locations.size();
         TimerTask task = new TimerTask() {
             public void run() {
+                if(unitLocations.size()+units.getTotal()==0)
+                {
+                    lose=true;
+                }
+                if(victory||lose)
+                {
+                    try {
+                        timer.cancel();
+                        CloseStage closeStage=new CloseStage(Attacker,stage);
+                        closeStage.close();
+                    }catch (Exception e)
+                    {
+
+                    }
+                }
                 if(unitLocations.size()>0)
                 {
+                    for(int i=0;i<defenceLocation.size();i++)
+                    {
+                        if(defenceLocation.get(i).isDestroyed)
+                        {
+                            defenceLocation.get(i).build.destroyed();
+                            defenceLocation.remove(i);
+                            break;
+                        }
+                    }
                 for(int i = 0; i< defenceLocation.size(); i++) {
                     for (int j = 0; j < unitLocations.size(); j++)
                     {
@@ -152,9 +182,6 @@ public class Attack {
         stage.setScene(scene);
         stage.setResizable(false);
         return stage;
-    }
-    public void refreshUnit(UnitLocation unitLocation)
-    {
     }
 
 

@@ -14,31 +14,28 @@ public class DefenceThread extends Thread{
     DefenceLocation defenceLocation;
     UnitLocation unitLocation;
     @Override
-    public void run()
-    {
+    public void run() {Timer timer = new Timer();
+         {
 
-        if(defenceLocation.build instanceof Cannon) {
-            ((Cannon)(defenceLocation.build)).busy= true;
-        }
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            public void run() {
-                    defenceLocation.Attack(unitLocation);
-                if(unitLocation.unit.isDead())
-                {
-                    unitLocation.unit.Dead();
-                    timer.cancel();
-                    Attack.unitLocations.remove(unitLocation);
-                    if(defenceLocation.build instanceof Cannon) {
-                        ((Cannon)(defenceLocation.build)).busy= false;
-                    }
-
-                }
+            if (defenceLocation.build instanceof Cannon) {
+                ((Cannon) (defenceLocation.build)).busy = true;
             }
-        };
-        timer.schedule(task,0,defenceLocation.speed);
+            TimerTask task = new TimerTask() {
+                public void run() {
+                    defenceLocation.Attack(unitLocation);
+                    if (unitLocation.unit.isDead()) {
+                        unitLocation.unit.Dead();
+                        timer.cancel();
+                        Attack.unitLocations.remove(unitLocation);
+                        if (defenceLocation.build instanceof Cannon) {
+                            ((Cannon) (defenceLocation.build)).busy = false;
+                        }
+                    }
+                }
+            };
+            timer.schedule(task, 0, defenceLocation.speed);
+        }
     }
-
     DefenceThread(DefenceLocation defenceLocation,UnitLocation unitLocation)
     {
         this.defenceLocation=defenceLocation;
