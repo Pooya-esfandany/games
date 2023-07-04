@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -31,6 +32,8 @@ public class Attack {
     public static ArrayList<DefenceLocation> defenceLocation =new ArrayList<>();
 
     public static Stage stage(InHandUnit units, Player Attacker, Player Defender) {
+        AudioClip media=new AudioClip("file:C:/Users/USER/Desktop/God/games/game/Data/map/attack.mp3");
+        media.play(30);
         ;
         victory=false;
         locations=Defender.mapData.getLocation();
@@ -58,6 +61,7 @@ public class Attack {
                     views=new ArrayList<>();
                     try {
                         timer.cancel();
+                        media.stop();
                         CloseStage closeStage=new CloseStage(Attacker,stage);
                         closeStage.close();
                     }catch (Exception e)
@@ -153,8 +157,12 @@ public class Attack {
         HBox box = new HBox();
         pane.getChildren().add(box);
         pane.setOnMouseClicked(event -> {
+            if(Attacker.mapData.isSafe((int) event.getX(), (int) event.getY()+50))
+            {
             if (units.haveUnit(current)) {
+
                 Unit unit = units.get(current);
+
                 UnitLocation unitLocation = new UnitLocation(unit, (int) event.getX()-50, (int) event.getY()+50);
                 pane.getChildren().add(unitLocation.unit.currentPose);
                 unitLocation.unit.currentPose.setLayoutY(event.getY()-50);
@@ -184,7 +192,7 @@ public class Attack {
                 thread.start();
             }
 
-        });
+        }});
         box.getChildren().addAll(archerPane, enhancerPane, knightPane, wizardPane);
         box.setLayoutY(600);
         Scene scene = new Scene(pane, 700, 700);

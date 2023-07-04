@@ -65,6 +65,22 @@ public class MapData implements Serializable {
 
     public int mapID;
     public int[][] safeZone=new int[7][7];
+    public boolean isSafe(int x,int y)
+    {
+        int X=(x)/100;
+        int Y=(y)/100;
+        if(Y>=7||X>=7)
+        {
+            return true;
+        }
+
+        if(safeZone[X][Y]==-1)
+        {
+            return true;
+        }
+        return false;
+
+    }
     public boolean Add(int x,int y,Build build) {
         if (safeZone[x][y] == -1) {
             safeZone[x][y] = build.ID()*10+ build.level-1;
@@ -108,5 +124,16 @@ public class MapData implements Serializable {
     public static void added()
     {
         total++;
+    }
+    public int levelCalculator()
+    {
+        int level=getLocation().size();
+        for(int i=0;i<7;i++)
+            for(int j=0;j<7;j++)
+                if(safeZone[i][j]!=-1)
+                {
+                    level+=safeZone[i][j]%10;
+                }
+        return level;
     }
 }

@@ -29,6 +29,7 @@ public class ReadPlayers extends  Thread{
                     int level=Integer.parseInt(resultSet.getString("level"));
                     Player player=new Player(username,password,money,level,battle,win,mapId);
                     player.mapData = Maps.Find(mapId);
+                    player.win=win;
                     Player.players.add(player);
                 }
                 connection.close();

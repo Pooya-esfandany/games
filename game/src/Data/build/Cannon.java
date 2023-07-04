@@ -56,9 +56,10 @@ int id;
     }
     public void upgrade() {
     if (haveUpgrade()) {
-        damage = damage +50;
+        damage = damage +500;
         level++;
-        hp = hp + 100;
+        hp = hp + 1000;
+        cost+=1500;
     }
 }
 public boolean haveUpgrade()
@@ -85,11 +86,11 @@ public boolean haveUpgrade()
         double totalY;
         if(unit.x>this.X)
         {
-            totalX=unit.x-this.X;
+            totalX=unit.x-this.X-50;
         }
         else
         {
-            totalX=this.X-unit.x;
+            totalX=this.X-unit.x-50;
         }
         if(unit.y>this.Y)
         {

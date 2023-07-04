@@ -1,6 +1,7 @@
 package view.attack;
 
 import Data.Player;
+import Data.unit.Archer;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -24,7 +25,7 @@ public class Result {
         Attack.locations=new ArrayList<>();
         Attack.defenceLocation=new ArrayList<>();
         Attack.unitLocations=new ArrayList<>();
-        double percent=(destroyedBuild/totalBuild)*100;
+        double percent=(((double)(destroyedBuild))/((double)(totalBuild)))*100;
         if(percent<20)
             main.setImage(star1.getImage());
         if(percent>=20&&percent<40)
@@ -33,10 +34,11 @@ public class Result {
             main.setImage(star3.getImage());
         if(percent>=60 && percent<80)
             main.setImage(star4.getImage());
-        if(percent>80)
+        if(percent>=80)
             main.setImage(star5.getImage());
         Pane pane=new Pane(main);
         Scene scene=new Scene(pane);
+        Archer.matchFinished();
         scene.setOnMouseClicked(event -> {
             player.totalMatch++;
             if(percent>=60)

@@ -6,7 +6,7 @@ import javafx.scene.image.ImageView;
 public class Storage extends Build  {
     String url=baseUrl+"Storage\\";
     int maxCapacity;
-    int currentMoney;
+    public int currentMoney;
     ImageView empty;
     ImageView notALot;
     ImageView half;

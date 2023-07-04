@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class WritePlayer extends Thread {
-    Player player;
+        Player player;
     public WritePlayer(Player player){
         this.player=player;
     }

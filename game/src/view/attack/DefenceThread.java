@@ -24,6 +24,9 @@ public class DefenceThread extends Thread{
                 public void run() {
                     if(defenceLocation.build.hp>0)
                     {
+                        if (defenceLocation.build instanceof Cannon) {
+                            ((Cannon) (defenceLocation.build)).busy = true;
+                        }
                     defenceLocation.Attack(unitLocation);
                     if (unitLocation.unit.isDead()) {
                         unitLocation.unit.Dead();

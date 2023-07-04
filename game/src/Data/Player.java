@@ -10,7 +10,7 @@ public class Player {
     public static ArrayList<Player> players=new ArrayList<>();
     public String name;
     public String password;
-    public int win;
+    public int win=0;
     public int totalMatch;
     public int level;
     int capacity;

@@ -23,8 +23,8 @@ public class UnitThread extends Thread{
     {
         while(!unitLocation.unit.isDead())
         {
-            int distanceX=0;
-            int distanceY=0;
+            double distanceX=0;
+            double distanceY=0;
             boolean left;
             if(buildLocations.size()==0)
             {
@@ -43,40 +43,38 @@ public class UnitThread extends Thread{
             if(closestBuild.x>unitLocation.x)
             {
                 unitLocation.unit.WalkingRight();
-
-                distanceX=-unitLocation.x+closestBuild.x-50;
-
             }
             if(closestBuild.x<unitLocation.x)
             {
                 unitLocation.unit.WalkingLeft();
                 left=true;
-                 distanceX=closestBuild.x-unitLocation.x-50;
+
 
             } else {
                 left = false;
             }
-            if(closestBuild.y>unitLocation.y)
-            {
-                distanceY=-unitLocation.y+closestBuild.y+50;
-            }
-            if(closestBuild.y<unitLocation.y)
-            {
-                distanceY=closestBuild.y-unitLocation.y+50;
-            }
 
+                distanceY=-unitLocation.y+closestBuild.y+50;
+                distanceX=-unitLocation.x+closestBuild.x-50;
+                double totalDistance=(distanceX*distanceX)+(distanceY*distanceY);
+                totalDistance=Math.sqrt(totalDistance);
+                double range=unitLocation.unit.range;
+                double rangeX=(distanceX/totalDistance)*range;
+                double rangeY=(distanceY/totalDistance)*range;
+                distanceY-=rangeY;
+                distanceX-=rangeX;
             TranslateTransition translateTransition=new TranslateTransition();
             translateTransition.setDuration(Duration.millis(speed));
             translateTransition.setNode(unitLocation.unit.currentPose);
             translateTransition.setByY(distanceY);
             translateTransition.setByX(distanceX);
             translateTransition.play();
-            int finalDistanceY = distanceY;
-            int finalDistanceX = distanceX;
+            double finalDistanceY = distanceY;
+            double finalDistanceX = distanceX;
             translateTransition.setOnFinished(event -> {
                 if(!unitLocation.unit.isDead()){
-                unitLocation.y=unitLocation.y+ finalDistanceY;
-                unitLocation.x=unitLocation.x+ finalDistanceX;
+                unitLocation.y=(int)(unitLocation.y+ finalDistanceY);
+                unitLocation.x=(int)(unitLocation.x+ finalDistanceX);
                 if(left)
                 {
                     unitLocation.unit.AttackLeft();

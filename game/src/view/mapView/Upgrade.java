@@ -1,8 +1,7 @@
 package view.mapView;
 
 import Data.Player;
-import Data.build.Build;
-import Data.build.Builds;
+import Data.build.*;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -41,14 +40,48 @@ public class Upgrade {
         pane.setBackground(new Background(backgroundImage));
         pane.getChildren().add(stackPane);
         pane.getChildren().add(text);
-        Text currentHp=new Text(Integer.toString(build.hp));
+        VBox vBox=new VBox();
+        Text currentHp=new Text("HP :"+Integer.toString(build.hp));
         ImageView imageView=new ImageView("file:C:\\Users\\USER\\Desktop\\God\\games\\game\\Data\\button\\arrow.png");
-        Text nextHp=new Text(Integer.toString(upgradeBuild.hp));
+        Text nextHp=new Text("HP :"+Integer.toString(upgradeBuild.hp));
         HBox Hp=new HBox(currentHp,imageView,nextHp);
-        pane.getChildren().add(Hp);
+        vBox.getChildren().add(Hp);
+        if(build instanceof Defence)
+        {
+            Text firstDamage=null;
+            Text nextDamage=null;
+            if(build instanceof Cannon)
+            {
+                 firstDamage=new Text("Damage :"+((Cannon) build).damage);
+                 nextDamage=new Text(("Damage :"+((Cannon) upgradeBuild).damage));
+            }
+            if(build instanceof Crusher)
+            {
+                firstDamage=new Text("Damage :"+((Crusher) build).damage);
+                nextDamage=new Text(("Damage :"+((Crusher) upgradeBuild).damage));
+            }
+            ImageView arrow=new ImageView("file:C:\\Users\\USER\\Desktop\\God\\games\\game\\Data\\button\\arrow.png");
+            HBox hBox=new HBox();
+            hBox.getChildren().addAll(firstDamage,arrow,nextDamage);
+            vBox.getChildren().add(hBox);
+        }
+        if(build instanceof Camp)
+        {
+            Text currentCapacity=null;
+            Text nextCapacity=null;
+                currentCapacity=new Text("Capacity :"+((Camp) build).capacity);
+                nextCapacity=new Text(("Capacity :"+((Camp) upgradeBuild).capacity));
+            ImageView arrow=new ImageView("file:C:\\Users\\USER\\Desktop\\God\\games\\game\\Data\\button\\arrow.png");
+            HBox hBox=new HBox();
+            hBox.getChildren().addAll(currentCapacity,arrow,nextCapacity);
+            vBox.getChildren().add(hBox);
+        }
         Hp.setAlignment(Pos.CENTER);
         Hp.setLayoutY(230);
         Hp.setLayoutX(150);
+        pane.getChildren().add(vBox);
+        vBox.setLayoutY(150);
+        vBox.setLayoutX(200);
         stackPane.setOnMouseClicked(event -> {
             if(build.haveUpgrade())
             {

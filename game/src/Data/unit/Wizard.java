@@ -9,6 +9,8 @@ public class Wizard extends Unit{
     @Override
     public void Attack(BuildLocation buildLocation)
     {
-        buildLocation.build.hp*=0.7;
+        int extraDamage=(int)(buildLocation.build.hp*0.3);
+        buildLocation.build.hp-=extraDamage+damage;
     }
+
 }

@@ -15,7 +15,8 @@ public class Base  extends Build{
     public void upgrade() {
         level++;
         if (haveUpgrade()) {
-            hp += 500;
+            cost+=3000;
+            hp += 5000;
         }
     }
 

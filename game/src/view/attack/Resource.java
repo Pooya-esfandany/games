@@ -75,6 +75,26 @@ public class Resource {
         knightPane.getChildren().addAll(knight,KnightButton);
         knightPane.setAlignment(Pos.BOTTOM_CENTER);
         archerPane.setAlignment(Pos.BOTTOM_CENTER);
+        knight.setOnMouseClicked(event -> {
+            ImageView detailView=new ImageView(knight.getImage());
+            Unit unit=Units.getByID(1);
+            Detail.stage(detailView,unit).show();
+        });
+        enhancer.setOnMouseClicked(event -> {
+            ImageView detailView=new ImageView(enhancer.getImage());
+            Unit unit=Units.getByID(2);
+            Detail.stage(detailView,unit).show();
+        });
+        archer.setOnMouseClicked(event -> {
+            ImageView detailView=new ImageView(archer.getImage());
+            Unit unit=Units.getByID(3);
+            Detail.stage(detailView,unit).show();
+        });
+        wizard.setOnMouseClicked(event -> {
+            ImageView detailView=new ImageView(archer.getImage());
+            Unit unit=Units.getByID(4);
+            Detail.stage(detailView,unit).show();
+        });
         archerPane.getChildren().addAll(archer,ArcherButton);
         wizardButton.setOnMouseClicked(event -> {
             if(capacity>current)
@@ -117,6 +137,7 @@ public class Resource {
             Attack.lose=false;
             Attack.victory=false;
         });
+
         HBox Hbox=new HBox();
         Hbox.getChildren().addAll(archerPane,enhancerPane,knightPane,wizardPane);
         VBox vbox=new VBox();
@@ -124,6 +145,14 @@ public class Resource {
         vbox.getChildren().addAll(Hbox,attack);
         Scene scene=new Scene(vbox);
         stage.setScene(scene);
+        if(player.level<7)
+    {
+        Hbox.getChildren().remove(archerPane);
+    }
+        if(player.level<15)
+        {
+            Hbox.getChildren().remove(knightPane);
+        }
         return stage;
     }
 

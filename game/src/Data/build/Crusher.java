@@ -30,9 +30,10 @@ public class Crusher extends Build implements Defence{
         ImageView AttackImage;
         public void upgrade() {
             if (haveUpgrade()) {
-                damage = damage +50;
+                cost+=1000;
+                damage = damage +500;
                 level++;
-                hp = hp + 300;
+                hp = hp + 3000;
             }
         }
         public boolean haveUpgrade()
@@ -50,14 +51,15 @@ public class Crusher extends Build implements Defence{
     @Override
     public void Attack(UnitLocation unitLocation) {
             unitLocation.unit.hp=unitLocation.unit.hp-damage;
+            AttackMode();
     }
 
     @Override
     public boolean InRange(UnitLocation unit) {
-        if(this.X-range< unit.x &&this.X+range> unit.x)
+        if(this.X-range-50< unit.x &&this.X+range-50> unit.x)
         {
 
-            if(this.Y+range>unit.y&&this.Y-range<=unit.y)
+            if(this.Y+range+50>unit.y&&this.Y-range+50<=unit.y)
             {
                 AttackMode();
                 return true;
