@@ -33,7 +33,7 @@ public class Attack {
 
     public static Stage stage(InHandUnit units, Player Attacker, Player Defender) {
         AudioClip media=new AudioClip("file:C:/Users/USER/Desktop/God/games/game/Data/map/attack.mp3");
-        media.play(30);
+        media.play(0.1);
         ;
         victory=false;
         locations=Defender.mapData.getLocation();
@@ -51,11 +51,6 @@ public class Attack {
                 }
                 if(victory||lose)
                 {
-                    if(locations.size()==0)
-                    {
-                        Attack.victory=true;
-                    }
-
                     lose=false;
                     victory=false;
                     views=new ArrayList<>();
@@ -66,7 +61,6 @@ public class Attack {
                         closeStage.close();
                     }catch (Exception e)
                     {
-
                     }
                 }
                 if(unitLocations.size()>0)
@@ -200,6 +194,5 @@ public class Attack {
         stage.setResizable(false);
         return stage;
     }
-
 
 }

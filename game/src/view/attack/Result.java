@@ -44,7 +44,7 @@ public class Result {
             if(percent>=60)
             {
                 player.win++;
-                player.currentMoney+=5000;
+                player.currentMoney+=500000;
             }
             stage.close();
             MainPage.stage(player).show();

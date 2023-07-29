@@ -5,16 +5,16 @@ public class Units {
         Unit unit=null;
         switch (id) {
             case 1:
-                unit = new Knight("Knight", 40000, 250, 400, 2500, 50);
+                unit = new Knight("Knight", 40000, 250, 400, 40, 50);
                 break;
             case 2:
-                unit = new Enchantress("Enchantress", 30000, 100, 500, 2000, 50);
+                unit = new Enchantress("Enchantress", 30000, 150, 500, 50, 50);
                 break;
             case 3:
-                unit = new Archer("Archer", 2000, 5000, 1820, 4000, 150);
+                unit = new Archer("Archer", 2000, 5000, 1820, 21, 150);
                 break;
             case 4:
-                unit = new Wizard("Wizard", 2000, 500, 7200, 5000, 100);
+                unit = new Wizard("Wizard", 2000, 1000, 7200, 30, 100);
                 break;
         }
         return unit;

@@ -8,7 +8,6 @@ import Data.map.MapData;
 import Data.map.Maps;
 import Data.writeData.UpgradePlayer;
 import Data.writeData.WriteMap;
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -74,7 +73,8 @@ public class MainPage {
             stage.close();
             Profile.stage(player).show();
         });
-        BackgroundImage backgroundImage=new BackgroundImage(new Image("file:C:\\Users\\USER\\Desktop\\God\\games\\game\\Data\\map\\ground.png"), BackgroundRepeat.REPEAT,BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        BackgroundImage backgroundImage=new BackgroundImage(new Image("file:C:\\Users\\USER\\Desktop\\God\\games\\game\\Data\\map\\ground.png"),
+                BackgroundRepeat.REPEAT,BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         pane.setBackground(new Background(backgroundImage));
         for(int i=0;i<7;i++){
         for(int j=0;j<7;j++)

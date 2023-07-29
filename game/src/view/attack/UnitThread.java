@@ -37,7 +37,6 @@ public class UnitThread extends Thread{
             double time=Math.sqrt(distanceY*distanceY+distanceX*distanceX)/(speed);
             if(unitLocation.unit.isDead())
             {
-                unitLocation.unit.Dead();
             }
             else{
             if(closestBuild.x>unitLocation.x)
@@ -58,13 +57,26 @@ public class UnitThread extends Thread{
                 distanceX=-unitLocation.x+closestBuild.x-50;
                 double totalDistance=(distanceX*distanceX)+(distanceY*distanceY);
                 totalDistance=Math.sqrt(totalDistance);
+                boolean stopAndAttack=false;
+                if(totalDistance <=unitLocation.unit.range)
+                {
+                     stopAndAttack=true;
+                }
                 double range=unitLocation.unit.range;
                 double rangeX=(distanceX/totalDistance)*range;
                 double rangeY=(distanceY/totalDistance)*range;
                 distanceY-=rangeY;
                 distanceX-=rangeX;
+
             TranslateTransition translateTransition=new TranslateTransition();
-            translateTransition.setDuration(Duration.millis(speed));
+            double travelTime=((totalDistance-range)/((double)speed));
+            if(stopAndAttack==true)
+                {
+                    distanceY=0;
+                    distanceX=0;
+                    travelTime=0.001;
+                }
+            translateTransition.setDuration(Duration.seconds(travelTime));
             translateTransition.setNode(unitLocation.unit.currentPose);
             translateTransition.setByY(distanceY);
             translateTransition.setByX(distanceX);

@@ -26,9 +26,8 @@ public class Main extends Application {
         for (int i = 0; i < Player.players.size(); i++) {
             MapData.added();
         }
-        Stage stage1 = new login().stage();
-        stage1.show();
-        ;
+        login.stage().show();
+
     }
 
 

@@ -3,6 +3,7 @@ package Data.build;
 import Data.AttackData.UnitLocation;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.AudioClip;
 
 public  class Cannon extends Build implements Defence  {
 public int attackSpeed;
@@ -32,8 +33,8 @@ int id;
         attack_U=new ImageView(baseLocation+"U.gif");
         attack_R=new ImageView(baseLocation+"R.gif");
         attack_D=new ImageView(baseLocation+"D.gif");
-
     }
+
     public void Left()
     {
         super.defaultPhoto.setImage(attack_L.getImage());
@@ -76,6 +77,7 @@ public boolean haveUpgrade()
 
     @Override
     public void Attack(UnitLocation unitLocation) {
+
         unitLocation.unit.hp-=damage;
     }
     @Override

@@ -5,6 +5,7 @@ import Data.AttackData.DefenceLocation;
 import Data.AttackData.UnitLocation;
 import Data.build.Cannon;
 import Data.build.Crusher;
+import javafx.scene.media.AudioClip;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -30,6 +31,7 @@ public class DefenceThread extends Thread{
                     defenceLocation.Attack(unitLocation);
                     if (unitLocation.unit.isDead()) {
                         unitLocation.unit.Dead();
+
                         timer.cancel();
                         Attack.unitLocations.remove(unitLocation);
                         if (defenceLocation.build instanceof Cannon) {

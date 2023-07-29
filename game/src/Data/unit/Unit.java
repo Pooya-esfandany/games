@@ -57,8 +57,21 @@ public class Unit {
     {
         currentPose.setImage(R_Attack.getImage());
     }
+    public  int dead=0;
     public void Dead() {
-        currentPose.setImage(Dead.getImage());
+        if (dead == 0) {
+            dead=1;
+            currentPose.setImage(Death.getImage());
+            Timer timer = new Timer();
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+                    currentPose.setImage(Dead.getImage());
+                }
+            };
+            timer.schedule(task, 500);
+
+        }
     }
 
 
